@@ -108,6 +108,9 @@ function initSpiral() {
     // Mouse movement tracking for subtle interaction
     document.addEventListener('mousemove', onMouseMove);
     
+    // Touch movement tracking for mobile devices
+    document.addEventListener('touchmove', onTouchMove, { passive: true });
+    
     // Handle window resize
     window.addEventListener('resize', onWindowResize);
     
@@ -168,6 +171,20 @@ function onMouseMove(event) {
     // Calculate target rotation (subtle reaction)
     targetRotationX = mouseY * 0.08;
     targetRotationY = mouseX * 0.08;
+}
+
+// Handle touch events for mobile devices
+function onTouchMove(event) {
+    if (event.touches.length > 0) {
+        const touch = event.touches[0];
+        // Normalize touch position to -1 to 1 range
+        mouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(touch.clientY / window.innerHeight) * 2 + 1;
+        
+        // Calculate target rotation (subtle reaction)
+        targetRotationX = mouseY * 0.08;
+        targetRotationY = mouseX * 0.08;
+    }
 }
 
 function onWindowResize() {
