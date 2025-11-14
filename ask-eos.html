@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Eos - Amrita Shrivastava</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Kalam:wght@300;400;700&family=Figtree:wght@400&family=Caveat:wght@400;700&family=Indie+Flower&family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Loader Overlay -->
+    <div id="loader" class="loader">
+        <div class="loader-half loader-left">
+            <div class="loader-content">
+                <h1 class="loader-name">AMRITA SHRIVASTAVA</h1>
+                <p class="loader-portfolio">Portfolio</p>
+            </div>
+        </div>
+        <div class="loader-half loader-right">
+            <div class="loader-content">
+                <h1 class="loader-name">AMRITA SHRIVASTAVA</h1>
+                <p class="loader-portfolio">Portfolio</p>
+            </div>
+        </div>
+        <div class="loader-line-container">
+            <svg class="loader-line-svg-top" viewBox="0 0 100 500" preserveAspectRatio="none">
+                <path class="loader-line-path" d="M50,0 Q45,50 52,100 T48,200 Q52,250 48,300 T52,400 Q48,450 52,500" 
+                      fill="none" stroke="#F7F0F0" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <svg class="loader-line-svg-bottom" viewBox="0 0 100 500" preserveAspectRatio="none">
+                <path class="loader-line-path" d="M52,0 Q48,50 52,100 T48,200 Q52,250 48,300 T50,400 Q48,450 50,500" 
+                      fill="none" stroke="#F7F0F0" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content hidden">
+        <!-- Three.js Canvas Container -->
+        <div id="spiral-container"></div>
+
+        <!-- Main Frame -->
+        <div class="main-frame">
+
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1 class="main-name">
+                    <span class="name-english">AMRITA SHRIVASTAVA</span>
+                    <span class="name-hindi">अमृता श्रीवास्तव</span>
+                </h1>
+                <p class="subtitle">Designer and Developer</p>
+            </div>
+
+            <!-- Menu Section -->
+            <div class="menu-section">
+                <nav class="menu">
+                    <a href="index.html" class="menu-item"><span class="menu-text">Home</span></a>
+                    <a href="about.html" class="menu-item"><span class="menu-text">About</span></a>
+                    <a href="experience.html" class="menu-item"><span class="menu-text">Experience</span></a>
+                    <a href="projects.html" class="menu-item"><span class="menu-text">Projects</span></a>
+                    <a href="side-quests.html" class="menu-item"><span class="menu-text">Side Quests</span></a>
+                    <a href="contact.html" class="menu-item"><span class="menu-text">Contact</span></a>
+                    <a href="ask-eos.html" class="menu-item active"><span class="menu-text">Ask Eos</span></a>
+                </nav>
+            </div>
+
+            <!-- Unavailable Service Text -->
+            <div class="unavailable-service-text">
+                This service is currently unavailable in your region :(
+            </div>
+
+        </div>
+
+        <!-- Dark Theme Toggle -->
+        <div class="theme-toggle">
+            <button id="theme-toggle-btn" class="theme-toggle-button">
+                <span class="theme-square"></span>
+                <span class="theme-text">dark</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
