@@ -3,20 +3,26 @@ function initLoader() {
     const loader = document.getElementById('loader');
     const mainContent = document.getElementById('main-content');
     
-    // Check if we're on the home page and if loader has been shown before
-    const isHomePage = window.location.pathname === '/' || 
-                       window.location.pathname.endsWith('index.html') || 
-                       window.location.pathname === '';
-    const loaderShown = sessionStorage.getItem('loaderShown') === 'true';
+    // Check navigation type using Performance Navigation API
+    const navigationType = performance.getEntriesByType('navigation')[0]?.type || 
+                          (performance.navigation ? 
+                           (performance.navigation.type === 0 ? 'navigate' : 
+                            performance.navigation.type === 1 ? 'reload' : 
+                            performance.navigation.type === 2 ? 'back_forward' : 'navigate') : 
+                           'navigate');
     
-    // Only show loader on home page if it hasn't been shown before
-    if (isHomePage && !loaderShown) {
+    // Show loader on:
+    // - Initial page load (navigate)
+    // - Page refresh/reload (reload)
+    // - Link clicks (navigate)
+    // Don't show loader on:
+    // - Back/forward navigation (back_forward)
+    const shouldShowLoader = navigationType === 'navigate' || navigationType === 'reload';
+    
+    if (shouldShowLoader) {
         // Show main content but keep it hidden behind loader
         mainContent.classList.remove('hidden');
         mainContent.classList.add('visible');
-        
-        // Mark loader as shown
-        sessionStorage.setItem('loaderShown', 'true');
         
         // After 5 seconds, split the page
         setTimeout(() => {
@@ -28,7 +34,7 @@ function initLoader() {
             }, 1200);
         }, 5000);
     } else {
-        // Skip loader - show content immediately
+        // Skip loader for back/forward navigation - show content immediately
         loader.classList.add('hidden');
         mainContent.classList.remove('hidden');
         mainContent.classList.add('visible');
