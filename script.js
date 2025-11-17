@@ -11,15 +11,28 @@ function initLoader() {
                             performance.navigation.type === 2 ? 'back_forward' : 'navigate') : 
                            'navigate');
     
+    // On refresh, reset the session flag so first link click after refresh shows loader
+    if (navigationType === 'reload') {
+        sessionStorage.removeItem('loaderShownInSession');
+    }
+    
+    // Track if loader has been shown in this session (for first-time link clicks)
+    const loaderShownInSession = sessionStorage.getItem('loaderShownInSession') === 'true';
+    
     // Show loader on:
-    // - Initial page load (navigate)
-    // - Page refresh/reload (reload)
-    // - Link clicks (navigate)
+    // - Page refresh/reload (always show on reload)
+    // - Initial page load (first navigate, not shown in session yet)
+    // - First link click (first navigate in session)
     // Don't show loader on:
-    // - Back/forward navigation (back_forward)
-    const shouldShowLoader = navigationType === 'navigate' || navigationType === 'reload';
+    // - Subsequent navigations (already shown in session)
+    // - Back/forward navigation
+    const shouldShowLoader = navigationType === 'reload' || 
+                             (navigationType === 'navigate' && !loaderShownInSession);
     
     if (shouldShowLoader) {
+        // Mark loader as shown in this session
+        sessionStorage.setItem('loaderShownInSession', 'true');
+        
         // Show main content but keep it hidden behind loader
         mainContent.classList.remove('hidden');
         mainContent.classList.add('visible');
@@ -34,7 +47,7 @@ function initLoader() {
             }, 1200);
         }, 5000);
     } else {
-        // Skip loader for back/forward navigation - show content immediately
+        // Skip loader - show content immediately
         loader.classList.add('hidden');
         mainContent.classList.remove('hidden');
         mainContent.classList.add('visible');
